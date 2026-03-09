@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login - ResumeAI</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="container">
+    <header class="topbar">
+      <a href="index.html" class="brand">ResumeAI</a>
+
+      <nav class="navbar">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="pricing.html" class="nav-link">Pricing</a>
+        <a href="login.html" class="nav-link active">Login</a>
+        <a href="register.html" class="nav-link">Sign Up</a>
+      </nav>
+    </header>
+
+    <section class="auth-hero">
+      <div class="auth-shell">
+        <div class="auth-left">
+          <a href="index.html" class="auth-back-link top-back-link">← Back to home</a>
+
+          <div class="hero-badge">Welcome Back</div>
+          <h1>Get back into your account and continue optimizing resumes</h1>
+          <p class="subtitle">
+            Log in to keep using your plan, generate better job-ready resumes, and export your results in seconds.
+          </p>
+
+          <div class="auth-points">
+            <div class="auth-point">
+              <span class="auth-dot"></span>
+              <p>Continue from your current plan instantly</p>
+            </div>
+            <div class="auth-point">
+              <span class="auth-dot"></span>
+              <p>Access faster resume optimization with AI</p>
+            </div>
+            <div class="auth-point">
+              <span class="auth-dot"></span>
+              <p>Download polished versions as PDF anytime</p>
+            </div>
+          </div>
+        </div>
+
+        <section class="card auth-card premium-auth-card">
+          <div class="auth-card-top">
+            <p class="auth-kicker">Login</p>
+            <h2>Access your workspace</h2>
+            <p>Enter your details below to continue.</p>
+          </div>
+
+          <label for="email">Email</label>
+          <input id="email" type="email" placeholder="you@example.com" />
+
+          <label for="password">Password</label>
+          <input id="password" type="password" placeholder="Your password" />
+
+          <button id="loginBtn" class="auth-main-btn">Login</button>
+
+          <p id="message"></p>
+
+          <p class="auth-switch">
+            Don’t have an account?
+            <a href="register.html">Create one</a>
+          </p>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <script src="auth.js"></script>
+</body>
+</html>

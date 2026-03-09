@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ResumeAI</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="container">
+    <header class="topbar">
+      <a href="index.html" class="brand">ResumeAI</a>
+
+      <nav class="navbar" id="mainNav">
+  <a href="index.html" class="nav-link active">Home</a>
+  <a href="pricing.html" class="nav-link">Pricing</a>
+  <a href="login.html" class="nav-link guest-only">Login</a>
+  <a href="register.html" class="nav-link guest-only">Sign Up</a>
+  <a href="pricing.html" class="nav-link user-only hidden">My Plan</a>
+  <span id="planBadge" class="plan-badge user-only hidden"></span>
+  <button id="logoutBtn" class="nav-link nav-logout user-only hidden" type="button">Logout</button>
+</nav>
+    </header>
+
+    <section class="hero">
+      <div class="hero-badge">AI-Powered Resume Tool</div>
+      <h1>Optimize your resume for any job description</h1>
+      <p class="subtitle">
+        Paste your resume, add the job description, and get an AI-optimized version ready to download as PDF.
+      </p>
+    </section>
+
+    <section class="card">
+      <label for="resume">Your Resume</label>
+      <textarea id="resume" placeholder="Paste your resume here..."></textarea>
+
+      <label for="jobDescription">Job Description</label>
+      <textarea id="jobDescription" placeholder="Paste the job description here..."></textarea>
+
+      <button id="optimizeBtn">Optimize Resume</button>
+    </section>
+
+    <section class="card">
+      <div class="result-header">
+        <h2>Optimized Resume</h2>
+        <button id="downloadBtn">Download PDF</button>
+      </div>
+
+      <pre id="output">Your optimized resume will appear here...</pre>
+    </section>
+
+    <section class="features-grid">
+      <div class="feature-box">
+        <h3>Free Plan</h3>
+        <p>Every new user starts with 2 resume optimizations per month.</p>
+      </div>
+
+      <div class="feature-box">
+        <h3>Pro Plan</h3>
+        <p>Get unlimited resumes and priority processing for $9/month.</p>
+      </div>
+
+      <div class="feature-box">
+        <h3>Premium Plan</h3>
+        <p>Unlock unlimited resumes, priority processing and future AI features for $90/year.</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

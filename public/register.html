@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create Account - ResumeAI</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="container">
+    <header class="topbar">
+      <a href="index.html" class="brand">ResumeAI</a>
+
+      <nav class="navbar">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="pricing.html" class="nav-link">Pricing</a>
+        <a href="login.html" class="nav-link">Login</a>
+        <a href="register.html" class="nav-link active">Sign Up</a>
+      </nav>
+    </header>
+
+    <section class="auth-hero">
+      <div class="auth-shell">
+        <div class="auth-left">
+          <div class="hero-badge">Start Free</div>
+          <h1>Create your account and start with the Free plan</h1>
+          <p class="subtitle">
+            Every new user starts with 2 resume optimizations per month. Upgrade later whenever you want unlimited access.
+          </p>
+
+          <div class="auth-points">
+            <div class="auth-point">
+              <span class="auth-dot"></span>
+              <p>2 free resume tests per month</p>
+            </div>
+            <div class="auth-point">
+              <span class="auth-dot"></span>
+              <p>Upgrade anytime to Pro or Premium</p>
+            </div>
+            <div class="auth-point">
+              <span class="auth-dot"></span>
+              <p>Fast onboarding, no complicated setup</p>
+            </div>
+          </div>
+        </div>
+
+        <section class="card auth-card premium-auth-card">
+          <div class="auth-card-top">
+            <h2>Create Account</h2>
+            <p>Set up your account and start using ResumeAI.</p>
+          </div>
+
+          <label for="name">Name</label>
+          <input id="name" type="text" placeholder="Your name" />
+
+          <label for="email">Email</label>
+          <input id="email" type="email" placeholder="you@example.com" />
+
+          <label for="password">Password</label>
+          <input id="password" type="password" placeholder="Create a password" />
+
+          <button id="registerBtn" class="auth-main-btn">Create Account</button>
+
+          <p id="message"></p>
+
+          <p class="auth-switch">
+            Already have an account?
+            <a href="login.html">Login here</a>
+          </p>
+
+          <a href="index.html" class="auth-back-link">← Back to home</a>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <script src="auth.js"></script>
+</body>
+</html>

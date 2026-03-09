@@ -1,0 +1,21 @@
+{
+  "name": "ats-resume-builder",
+  "version": "1.0.0",
+  "description": "AI resume optimizer for ATS",
+  "main": "server.js",
+  "scripts": {
+    "dev": "node --watch server.js",
+    "start": "node server.js"
+  },
+  "type": "module",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "better-sqlite3": "^12.6.2",
+    "dotenv": "^16.6.1",
+    "express": "^4.21.0",
+    "express-session": "^1.19.0",
+    "html-pdf-node": "^1.0.8",
+    "openai": "^4.56.0",
+    "pg": "^8.20.0"
+  }
+}

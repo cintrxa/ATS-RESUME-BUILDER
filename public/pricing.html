@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pricing - ResumeAI</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="container">
+    <header class="topbar">
+      <a href="index.html" class="brand">ResumeAI</a>
+
+      <nav class="navbar" id="mainNav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="pricing.html" class="nav-link active">Pricing</a>
+        <a href="login.html" class="nav-link guest-only">Login</a>
+        <a href="register.html" class="nav-link guest-only">Sign Up</a>
+        <a href="pricing.html" class="nav-link user-only hidden">My Plan</a>
+        <span id="planBadge" class="plan-badge user-only hidden"></span>
+        <button id="logoutBtn" class="nav-link nav-logout user-only hidden" type="button">Logout</button>
+      </nav>
+    </header>
+
+    <section class="hero pricing-hero">
+      <div class="hero-badge">Simple Pricing</div>
+      <h1>Choose the plan that fits your job search</h1>
+      <p class="subtitle">
+        Start with the Free plan and upgrade whenever you need more power.
+      </p>
+    </section>
+
+    <section class="pricing-grid">
+      <article class="pricing-card">
+        <p class="plan-label">Free</p>
+        <h2 class="plan-price">$0</h2>
+        <p class="plan-subtitle">Perfect to test the platform</p>
+
+        <ul class="plan-features">
+          <li>2 resume tests per month</li>
+        </ul>
+
+        <button class="plan-button secondary-plan-button plan-action-btn" data-plan="free" type="button">
+          Start Free
+        </button>
+      </article>
+
+      <article class="pricing-card featured-card">
+        <div class="popular-badge">Most Popular</div>
+        <p class="plan-label">Pro</p>
+        <h2 class="plan-price">$9<span>/month</span></h2>
+        <p class="plan-subtitle">For active job seekers</p>
+
+        <ul class="plan-features">
+          <li>Unlimited resumes</li>
+          <li>Priority processing</li>
+        </ul>
+
+        <button class="plan-button primary-plan-button plan-action-btn" data-plan="pro" type="button">
+          Get Pro
+        </button>
+      </article>
+
+      <article class="pricing-card">
+        <p class="plan-label">Premium</p>
+        <h2 class="plan-price">$90<span>/year</span></h2>
+        <p class="plan-subtitle">Best long-term value</p>
+
+        <ul class="plan-features">
+          <li>Unlimited resumes</li>
+          <li>Priority processing</li>
+          <li>Future AI features</li>
+        </ul>
+
+        <button class="plan-button secondary-plan-button plan-action-btn" data-plan="premium" type="button">
+          Choose Premium
+        </button>
+      </article>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
