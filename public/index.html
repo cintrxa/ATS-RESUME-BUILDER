@@ -12,14 +12,14 @@
       <a href="index.html" class="brand">ResumeAI</a>
 
       <nav class="navbar" id="mainNav">
-  <a href="index.html" class="nav-link active">Home</a>
-  <a href="pricing.html" class="nav-link">Pricing</a>
-  <a href="login.html" class="nav-link guest-only">Login</a>
-  <a href="register.html" class="nav-link guest-only">Sign Up</a>
-  <a href="pricing.html" class="nav-link user-only hidden">My Plan</a>
-  <span id="planBadge" class="plan-badge user-only hidden"></span>
-  <button id="logoutBtn" class="nav-link nav-logout user-only hidden" type="button">Logout</button>
-</nav>
+        <a href="index.html" class="nav-link active">Home</a>
+        <a href="pricing.html" class="nav-link">Pricing</a>
+        <a href="login.html" class="nav-link guest-only">Login</a>
+        <a href="register.html" class="nav-link guest-only">Sign Up</a>
+        <a href="pricing.html" class="nav-link user-only hidden">My Plan</a>
+        <span id="planBadge" class="plan-badge user-only hidden"></span>
+        <button id="logoutBtn" class="nav-link nav-logout user-only hidden" type="button">Logout</button>
+      </nav>
     </header>
 
     <section class="hero">
@@ -38,6 +38,34 @@
       <textarea id="jobDescription" placeholder="Paste the job description here..."></textarea>
 
       <button id="optimizeBtn">Optimize Resume</button>
+    </section>
+
+    <section class="card" id="atsCard">
+      <div class="result-header">
+        <h2>ATS Score</h2>
+      </div>
+
+      <div class="ats-score-box">
+        <div id="atsScore" class="ats-score-number">--/100</div>
+      </div>
+
+      <div class="ats-progress-wrap">
+        <div class="ats-progress-bar">
+          <div id="atsProgressFill" class="ats-progress-fill"></div>
+        </div>
+      </div>
+
+      <div class="ats-insights">
+        <div class="ats-column">
+          <h3>Strengths</h3>
+          <ul id="strengthsList"></ul>
+        </div>
+
+        <div class="ats-column">
+          <h3>Weaknesses</h3>
+          <ul id="weaknessesList"></ul>
+        </div>
+      </div>
     </section>
 
     <section class="card">

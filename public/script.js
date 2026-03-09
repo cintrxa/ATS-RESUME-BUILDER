@@ -6,6 +6,10 @@ const downloadBtn = document.getElementById("downloadBtn");
 const logoutBtn = document.getElementById("logoutBtn");
 const planBadge = document.getElementById("planBadge");
 const planActionButtons = document.querySelectorAll(".plan-action-btn");
+const atsScore = document.getElementById("atsScore");
+const atsProgressFill = document.getElementById("atsProgressFill");
+const strengthsList = document.getElementById("strengthsList");
+const weaknessesList = document.getElementById("weaknessesList");
 
 async function updateNavbar() {
   try {
@@ -15,15 +19,15 @@ async function updateNavbar() {
     const userItems = document.querySelectorAll(".user-only");
 
     if (!response.ok) {
-      guestItems.forEach(el => el.classList.remove("hidden"));
-      userItems.forEach(el => el.classList.add("hidden"));
+      guestItems.forEach((el) => el.classList.remove("hidden"));
+      userItems.forEach((el) => el.classList.add("hidden"));
       return;
     }
 
     const data = await response.json();
 
-    guestItems.forEach(el => el.classList.add("hidden"));
-    userItems.forEach(el => el.classList.remove("hidden"));
+    guestItems.forEach((el) => el.classList.add("hidden"));
+    userItems.forEach((el) => el.classList.remove("hidden"));
 
     if (planBadge && data.user) {
       const user = data.user;
@@ -35,9 +39,10 @@ async function updateNavbar() {
         planBadge.innerText = "Pro Plan • Unlimited";
       } else if (user.plan === "premium") {
         planBadge.innerText = "Premium Plan • Unlimited";
+      } else {
+        planBadge.innerText = "Plan";
       }
     }
-
   } catch (err) {
     console.error(err);
   }
@@ -55,14 +60,11 @@ if (logoutBtn) {
 }
 
 if (planActionButtons.length > 0) {
-  planActionButtons.forEach(button => {
-
+  planActionButtons.forEach((button) => {
     button.addEventListener("click", async () => {
-
       const plan = button.dataset.plan;
 
       try {
-
         const authCheck = await fetch("/auth/me");
 
         if (!authCheck.ok) {
@@ -87,19 +89,22 @@ if (planActionButtons.length > 0) {
 
         alert(`Your plan is now ${plan.toUpperCase()}.`);
         updateNavbar();
-
       } catch (err) {
         console.error(err);
       }
-
     });
-
   });
 }
 
 if (optimizeBtn) {
   optimizeBtn.addEventListener("click", async () => {
 
+    const authCheck = await fetch("/auth/me");
+
+    if (!authCheck.ok) {
+      window.location.href = "login.html";
+      return;
+    }
     const resume = resumeInput.value.trim();
     const jobDescription = jobDescriptionInput.value.trim();
 
@@ -112,8 +117,23 @@ if (optimizeBtn) {
     optimizeBtn.innerText = "Optimizing...";
     output.innerText = "Analyzing your resume...";
 
-    try {
+    if (atsScore) {
+      atsScore.innerText = "--/100";
+    }
 
+    if (atsProgressFill) {
+      atsProgressFill.style.width = "0%";
+    }
+
+    if (strengthsList) {
+      strengthsList.innerHTML = "";
+    }
+
+    if (weaknessesList) {
+      weaknessesList.innerHTML = "";
+    }
+
+    try {
       const response = await fetch("/api/optimize-resume", {
         method: "POST",
         headers: {
@@ -125,7 +145,6 @@ if (optimizeBtn) {
       const data = await response.json();
 
       if (!response.ok) {
-
         if (response.status === 401) {
           window.location.href = "login.html";
           return;
@@ -143,8 +162,34 @@ if (optimizeBtn) {
 
       output.innerText = data.optimizedResume;
 
-      updateNavbar();
+      if (atsScore) {
+        atsScore.innerText = `${data.score}/100`;
+      }
 
+      if (atsProgressFill) {
+        const safeScore = Math.max(0, Math.min(100, Number(data.score) || 0));
+        atsProgressFill.style.width = `${safeScore}%`;
+      }
+
+      if (strengthsList && Array.isArray(data.strengths)) {
+        strengthsList.innerHTML = "";
+        data.strengths.forEach((item) => {
+          const li = document.createElement("li");
+          li.textContent = item;
+          strengthsList.appendChild(li);
+        });
+      }
+
+      if (weaknessesList && Array.isArray(data.weaknesses)) {
+        weaknessesList.innerHTML = "";
+        data.weaknesses.forEach((item) => {
+          const li = document.createElement("li");
+          li.textContent = item;
+          weaknessesList.appendChild(li);
+        });
+      }
+
+      updateNavbar();
     } catch (err) {
       console.error(err);
       output.innerText = "Error connecting to the server.";
@@ -152,13 +197,11 @@ if (optimizeBtn) {
 
     optimizeBtn.disabled = false;
     optimizeBtn.innerText = "Optimize Resume";
-
   });
 }
 
 if (downloadBtn) {
   downloadBtn.addEventListener("click", async () => {
-
     const content = output.innerText;
 
     if (!content || content.includes("appear here")) {
@@ -166,21 +209,25 @@ if (downloadBtn) {
       return;
     }
 
-    const response = await fetch("/api/download-pdf", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ content })
-    });
+    try {
+      const response = await fetch("/api/download-pdf", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ content })
+      });
 
-    const blob = await response.blob();
+      const blob = await response.blob();
 
-    const link = document.createElement("a");
-    link.href = window.URL.createObjectURL(blob);
-    link.download = "optimized_resume.pdf";
-    link.click();
-
+      const link = document.createElement("a");
+      link.href = window.URL.createObjectURL(blob);
+      link.download = "optimized_resume.pdf";
+      link.click();
+    } catch (err) {
+      console.error(err);
+      alert("Error generating PDF.");
+    }
   });
 }
 

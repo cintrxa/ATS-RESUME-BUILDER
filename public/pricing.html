@@ -1,84 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pricing - ResumeAI</title>
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pricing - ResumeAI</title>
+<link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-  <main class="container">
-    <header class="topbar">
-      <a href="index.html" class="brand">ResumeAI</a>
 
-      <nav class="navbar" id="mainNav">
-        <a href="index.html" class="nav-link">Home</a>
-        <a href="pricing.html" class="nav-link active">Pricing</a>
-        <a href="login.html" class="nav-link guest-only">Login</a>
-        <a href="register.html" class="nav-link guest-only">Sign Up</a>
-        <a href="pricing.html" class="nav-link user-only hidden">My Plan</a>
-        <span id="planBadge" class="plan-badge user-only hidden"></span>
-        <button id="logoutBtn" class="nav-link nav-logout user-only hidden" type="button">Logout</button>
-      </nav>
-    </header>
+<main class="container">
 
-    <section class="hero pricing-hero">
-      <div class="hero-badge">Simple Pricing</div>
-      <h1>Choose the plan that fits your job search</h1>
-      <p class="subtitle">
-        Start with the Free plan and upgrade whenever you need more power.
-      </p>
-    </section>
+<header class="topbar">
+<a href="index.html" class="brand">ResumeAI</a>
 
-    <section class="pricing-grid">
-      <article class="pricing-card">
-        <p class="plan-label">Free</p>
-        <h2 class="plan-price">$0</h2>
-        <p class="plan-subtitle">Perfect to test the platform</p>
+<nav class="navbar">
+<a href="index.html" class="nav-link">Home</a>
+<a href="pricing.html" class="nav-link active">Pricing</a>
+<a href="login.html" class="nav-link">Login</a>
+<a href="register.html" class="nav-link">Sign Up</a>
+</nav>
+</header>
 
-        <ul class="plan-features">
-          <li>2 resume tests per month</li>
-        </ul>
+<section class="hero">
+<h1>Choose your plan</h1>
+<p class="subtitle">
+Upgrade to unlock unlimited resume optimizations.
+</p>
+</section>
 
-        <button class="plan-button secondary-plan-button plan-action-btn" data-plan="free" type="button">
-          Start Free
-        </button>
-      </article>
+<section class="pricing-grid">
 
-      <article class="pricing-card featured-card">
-        <div class="popular-badge">Most Popular</div>
-        <p class="plan-label">Pro</p>
-        <h2 class="plan-price">$9<span>/month</span></h2>
-        <p class="plan-subtitle">For active job seekers</p>
+<div class="pricing-card">
 
-        <ul class="plan-features">
-          <li>Unlimited resumes</li>
-          <li>Priority processing</li>
-        </ul>
+<h2>Free</h2>
 
-        <button class="plan-button primary-plan-button plan-action-btn" data-plan="pro" type="button">
-          Get Pro
-        </button>
-      </article>
+<div class="price">
+$0
+</div>
 
-      <article class="pricing-card">
-        <p class="plan-label">Premium</p>
-        <h2 class="plan-price">$90<span>/year</span></h2>
-        <p class="plan-subtitle">Best long-term value</p>
+<ul class="pricing-features">
+<li>2 resume optimizations / month</li>
+<li>ATS Score</li>
+<li>Basic AI optimization</li>
+</ul>
 
-        <ul class="plan-features">
-          <li>Unlimited resumes</li>
-          <li>Priority processing</li>
-          <li>Future AI features</li>
-        </ul>
+<button class="plan-btn disabled">
+Current Plan
+</button>
 
-        <button class="plan-button secondary-plan-button plan-action-btn" data-plan="premium" type="button">
-          Choose Premium
-        </button>
-      </article>
-    </section>
-  </main>
+</div>
 
-  <script src="script.js"></script>
+
+<div class="pricing-card featured">
+
+<h2>Pro</h2>
+
+<div class="price">
+$9 <span>/month</span>
+</div>
+
+<ul class="pricing-features">
+<li>Unlimited resume optimizations</li>
+<li>Priority processing</li>
+<li>Advanced AI rewriting</li>
+</ul>
+
+<button onclick="goToPayment('pro')" class="plan-btn">
+Choose Pro
+</button>
+
+</div>
+
+
+<div class="pricing-card">
+
+<h2>Premium</h2>
+
+<div class="price">
+$90 <span>/year</span>
+</div>
+
+<ul class="pricing-features">
+<li>Unlimited resumes</li>
+<li>Priority processing</li>
+<li>Future AI features</li>
+</ul>
+
+<button onclick="goToPayment('premium')" class="plan-btn">
+Choose Premium
+</button>
+
+</div>
+
+</section>
+
+</main>
+
+
+<script>
+
+async function goToPayment(plan){
+
+const auth = await fetch("/auth/me");
+
+if(!auth.ok){
+
+window.location.href = "login.html";
+
+return;
+
+}
+
+if(plan === "pro"){
+
+window.location.href = "payment-pro.html";
+
+}
+
+if(plan === "premium"){
+
+window.location.href = "payment-premium.html";
+
+}
+
+}
+
+</script>
+
 </body>
 </html>

@@ -213,24 +213,33 @@ app.post("/api/optimize-resume", requireAuth, async (req, res) => {
     }
 
     const prompt = `
-You are an expert resume writer specialized in ATS optimization.
+You are an expert ATS resume evaluator and resume writer.
 
-Rewrite and improve the candidate's resume using the job description.
+Analyze the candidate's resume against the job description.
+
+Your job is to:
+1. Give an ATS score from 0 to 100
+2. List 3 strengths
+3. List 3 weaknesses
+4. Rewrite and improve the resume for ATS optimization
 
 Rules:
 - Keep information truthful
 - Improve wording
 - Add relevant keywords
-- Do not invent experience
+- Do not invent fake experience
+- Return valid JSON only
+- Do not include markdown
+- Do not include explanations outside JSON
 
-Return the resume structured with sections:
+Return JSON in this exact structure:
 
-NAME
-PROFESSIONAL SUMMARY
-SKILLS
-WORK EXPERIENCE
-EDUCATION
-PROJECTS
+{
+  "score": 0,
+  "strengths": ["", "", ""],
+  "weaknesses": ["", "", ""],
+  "optimizedResume": ""
+}
 
 Resume:
 ${resume}
@@ -245,7 +254,7 @@ ${jobDescription}
       messages: [
         {
           role: "system",
-          content: "You are a professional resume optimization assistant."
+          content: "You are a professional ATS resume evaluator and resume optimization assistant."
         },
         {
           role: "user",
@@ -254,7 +263,8 @@ ${jobDescription}
       ]
     });
 
-    const optimizedResume = response.choices[0].message.content;
+    const aiRaw = response.choices[0].message.content;
+    const aiData = JSON.parse(aiRaw);
 
     db.prepare(`
       UPDATE users
@@ -262,7 +272,12 @@ ${jobDescription}
       WHERE id = ?
     `).run(user.id);
 
-    return res.json({ optimizedResume });
+    return res.json({
+      score: aiData.score,
+      strengths: aiData.strengths,
+      weaknesses: aiData.weaknesses,
+      optimizedResume: aiData.optimizedResume
+    });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ error: error.message });
@@ -274,8 +289,8 @@ app.post("/api/download-pdf", async (req, res) => {
     const { content } = req.body;
 
     const file = {
-      content: `<pre>${content}</pre>`
-    };
+      content: `<pre>${content}</pre >`
+      };
 
     const options = {
       format: "A4"
